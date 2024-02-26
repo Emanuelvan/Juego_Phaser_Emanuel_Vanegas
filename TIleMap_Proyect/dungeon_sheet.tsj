@@ -1,0 +1,14 @@
+{ "columns":24,
+ "image":"..\/Assets\/Tiles_Map\/dungeon_sheet.png",
+ "imageheight":160,
+ "imagewidth":384,
+ "margin":0,
+ "name":"dungeon_sheet",
+ "spacing":0,
+ "tilecount":240,
+ "tiledversion":"1.10.2",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.10"
+}

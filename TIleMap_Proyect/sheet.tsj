@@ -1,0 +1,14 @@
+{ "columns":19,
+ "image":"..\/Assets\/Tiles_Map\/sheet.png",
+ "imageheight":208,
+ "imagewidth":304,
+ "margin":0,
+ "name":"sheet",
+ "spacing":0,
+ "tilecount":247,
+ "tiledversion":"1.10.2",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.10"
+}

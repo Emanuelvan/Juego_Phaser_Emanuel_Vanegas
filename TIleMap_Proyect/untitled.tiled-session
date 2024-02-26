@@ -1,0 +1,38 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "dungeon_tiles.tsj": {
+            "scaleInDock": 2,
+            "scaleInEditor": 2
+        },
+        "sheet.tsj": {
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        }
+    },
+    "last.imagePath": "P:/Downloads",
+    "map.height": 15,
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 22,
+    "openFiles": [
+    ],
+    "project": "untitled.tiled-project",
+    "recentFiles": [
+        "dungeon_tiles.tsj",
+        "sheet.tsj"
+    ],
+    "tileset.lastUsedFormat": "json",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
