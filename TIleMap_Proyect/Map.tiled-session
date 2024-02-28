@@ -1,14 +1,20 @@
 {
-    "activeFile": "",
+    "activeFile": "dungeon_sheet.tsj",
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "dungeon_sheet.tsj": {
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        }
     },
     "last.imagePath": "C:/Users/emaxb/Desktop/Emax_4/USB/Septimo Semestre/Videojuegos/Phaser_game/Objetivo Sobrevive/Assets/Tiles_Map",
     "openFiles": [
+        "dungeon_sheet.tsj"
     ],
     "project": "Map.tiled-project",
     "recentFiles": [
+        "dungeon_sheet.tsj"
     ],
     "tileset.lastUsedFormat": "json",
     "tileset.tileSize": {
