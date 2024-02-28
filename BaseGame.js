@@ -1,6 +1,5 @@
 const debug = false;
 
-
 const TILES = {
     TOP_LEFT_WALL: 0,
     TOP_RIGHT_WALL: 2,
@@ -47,6 +46,7 @@ class Juego_Principal extends Phaser.Scene {
     teclas;
     cam;
     layer;
+    BackgroundMusic;
 
 
     preload() {
@@ -56,6 +56,7 @@ class Juego_Principal extends Phaser.Scene {
         });
         this.load.image('tiles', 'Assets/Tiles_Map/dungeon_sheet.png');
         this.load.atlas('PlayerAnimation', 'Jugador/Animaciones/Animacion_Knight.png', 'Jugador/Animaciones/Animacion_Knight.json')
+        this.load.audio('Ambiente','Audio/Music/Old RuneScape Soundtrack Crystal Sword.mp3')
     }
 
     create() {
@@ -70,7 +71,8 @@ class Juego_Principal extends Phaser.Scene {
         this.mapa = this.make.tilemap({ tileWidth: 16, tileHeight: 16, width: this.mazmorra.width, height: this.mazmorra.height });
         var tileset = this.mapa.addTilesetImage('tiles', 'tiles', 16, 16);
         this.layer = this.mapa.createBlankLayer('Layer 1', tileset);
-
+        this.BackgroundMusic = this.sound.add("Ambiente") 
+        this.BackgroundMusic.play({loop:true, volume: 0.1});//Volumen del audio
         if (!debug) {
             this.layer.setScale(5);
         }
@@ -189,29 +191,13 @@ class Juego_Principal extends Phaser.Scene {
         this.cam.scrollY = this.jugador.y - this.cam.height * 0.5;
 
 
-        var info = this.add.text(400, 16, 'Usa WASD para moverte', {
-            fontSize: '25px',
+        var info = this.add.text(300, 16, 'Usa WASD para moverte y ESPACIO para atacar', {
             padding: { x: 5, y: 5 },
             backgroundColor: '#ffffff',
             fill: '#000000'
         });
 
         info.setScrollFactor(0);
-
-        /*      var gui = new dat.GUI();
-     
-             gui.addFolder('Camera');
-             gui.add(this.cam, 'scrollX').listen();
-             gui.add(this.cam, 'scrollY').listen();
-             gui.add(this.cam, 'zoom', 0.1, 4).step(0.1);
-             gui.add(this.cam, 'rotation').step(0.01);
-             gui.add(this.layer, 'skipCull').listen();
-             gui.add(this.layer, 'cullPaddingX').step(1);
-             gui.add(this.layer, 'cullPaddingY').step(1);
-             gui.add(this.layer, 'tilesDrawn').listen();
-             gui.add(this.layer, 'tilesTotal').listen(); */
-
-
 
     }
     update(time) {
@@ -266,7 +252,7 @@ const config = {
     backgroundColor: '#2a2a55',
     parent: 'phaser-example',
     pixelArt: true,
-    roundPixels: false,
+    roundPixels: true,
     scene: Juego_Principal,
     physics: {
         default: 'arcade',
