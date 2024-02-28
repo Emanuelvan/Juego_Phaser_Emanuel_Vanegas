@@ -8,8 +8,8 @@ const TILES = {
     BOTTOM_LEFT_WALL: 48,
     TOP_WALL: [
         { index: 1, weight: 4 },
-        { index: 1, weight: 1 },
-        { index: 1, weight: 1 },
+        { index: 170, weight: 1 },
+        { index: 169, weight: 1 },
         { index: 1, weight: 1 }
     ],
     LEFT_WALL: [
@@ -32,9 +32,10 @@ const TILES = {
     ],
     FLOOR: [
         { index: 25, weight: 20 },
-        { index: 25, weight: 1 },
-        { index: 25, weight: 1 },
-        { index: 25, weight: 1 },
+        { index: 183, weight: 1 },
+        { index: 184, weight: 1 },
+        { index: 185, weight: 1 },
+        { index: 186, weight: 1 }
     ]
 };
 
@@ -49,13 +50,10 @@ class Juego_Principal extends Phaser.Scene {
 
 
     preload() {
-        //this.load.image('tiles', 'Assets/Tiles_map/Sprute.png');
-        //this.load.image('tiles', 'Assets/Tiles_map/sheet.png');
         this.load.spritesheet("personaje", 'Assets/Personaje/knight1.png', {
             frameWidth: 72,
             frameHeight: 72,
         });
-        //this.load.image('tiles', 'Assets/Tiles_Map/dungeon_tiles.png');
         this.load.image('tiles', 'Assets/Tiles_Map/dungeon_sheet.png');
         this.load.atlas('PlayerAnimation', 'Jugador/Animaciones/Animacion_Knight.png', 'Jugador/Animaciones/Animacion_Knight.json')
     }
@@ -164,16 +162,22 @@ class Juego_Principal extends Phaser.Scene {
                             }
                         } */
         }, this);
+        
 
-        this.layer.setCollisionByExclusion([25, 207]);
+
+
+        this.layer.setCollisionByExclusion([25, 207,183,184,185,186]);
         if (!debug) {
             this.layer.forEachTile(function (tile) { tile.alpha = 0; });
         }
         let playerList = ["Idle_Down", "walk_down", "idle_upward", "walk_up", "idle_upward", "idle_left", "walk_left", "idle_right", "walk_right", "attack_down", "attack_up", "attack_left", "attack_right", "action_down", "action_up", "action_left", "action_right"]
         var playerRoom = this.mazmorra.rooms[0];
 
-        this.jugador = new jugador(this, this.mapa.tileToWorldX(playerRoom.x + 1), this.mapa.tileToWorldY(playerRoom.y + 1), "personaje");
+        //Se crea al jugador 
+        this.jugador = new jugador(this, this.mapa.tileToWorldX(playerRoom.x + 2), this.mapa.tileToWorldY(playerRoom.y + 2), "personaje");
         this.jugador.animationCharacter(playerList);
+
+
         if (!debug) {
             this.setRoomAlpha(playerRoom, 1); // Muestra la primera habitación
         }
@@ -185,14 +189,14 @@ class Juego_Principal extends Phaser.Scene {
         this.cam.scrollY = this.jugador.y - this.cam.height * 0.5;
 
 
-        var help = this.add.text(450, 16, 'Usa WASD para moverte', {
+        var info = this.add.text(400, 16, 'Usa WASD para moverte', {
             fontSize: '25px',
-            padding: { x: 10, y: 5 },
+            padding: { x: 5, y: 5 },
             backgroundColor: '#ffffff',
             fill: '#000000'
         });
 
-        help.setScrollFactor(0);
+        info.setScrollFactor(0);
 
         /*      var gui = new dat.GUI();
      
@@ -210,12 +214,13 @@ class Juego_Principal extends Phaser.Scene {
 
 
     }
-    update(time, delta) {
+    update(time) {
+        //Se actuliza la posisición del jugador
         this.jugador.updatePlayerMovement(time);
-
         var playerTileX = this.mapa.worldToTileX(this.jugador.x);
         var playerTileY = this.mapa.worldToTileY(this.jugador.y);
-        var room = this.mazmorra.getRoomAt(playerTileX, playerTileY);//Un metodo que ayuda a generar las habitaciones
+
+        var room = this.mazmorra.getRoomAt(playerTileX, playerTileY);//Un metodo que ayuda a generar las habitaciones creando el cuarto al momento que el jugador entra a la habitación
 
         if (room && this.activeRoom && this.activeRoom !== room)//Hace que el cuarto anterior se oscurezca
         {
@@ -227,12 +232,12 @@ class Juego_Principal extends Phaser.Scene {
 
         this.activeRoom = room;
 
-        // Smooth follow the player
+        // La camara sigue al jugador
         var smoothFactor = 0.9;
-
         this.cam.scrollX = smoothFactor * this.cam.scrollX + (1 - smoothFactor) * (this.jugador.x - this.cam.width * 0.5);
         this.cam.scrollY = smoothFactor * this.cam.scrollY + (1 - smoothFactor) * (this.jugador.y - this.cam.height * 0.5);
     }
+
     setRoomAlpha(room, alpha) {
         this.mapa.forEachTile(function (tile) {
             tile.alpha = alpha;
@@ -243,7 +248,6 @@ class Juego_Principal extends Phaser.Scene {
         // nonNull = true, don't return null for empty tiles. This means null will be returned only for
         // tiles outside of the bounds of the mapa.
         var tile = this.mapa.getTileAtWorldXY(worldX, worldY, true);
-
         if (tile && !tile.collides) {
             return true;
         }
@@ -251,10 +255,6 @@ class Juego_Principal extends Phaser.Scene {
             return false;
         }
     }
-
-
-
-
 }
 
 
