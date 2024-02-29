@@ -1,788 +1,788 @@
 {
-    "frames": [
-        {
-            "filename": "knight_Idle_Down_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 0,
-                "y": 0
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_walk_down_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 95,
-                "y": 0
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_Idle_Down_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 0,
-                "y": 95
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_walk_down_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 95,
-                "y": 95
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_Idle_Down_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 190,
-                "y": 0
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_idle_upward_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 190,
-                "y": 95
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_walk_up_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 0,
-                "y": 190
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_idle_upward_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 95,
-                "y": 190
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_walk_up_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 190,
-                "y": 190
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_idle_upward_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 285,
-                "y": 0
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_idle_left_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 285,
-                "y": 95
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_walk_left_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 285,
-                "y": 190
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_idle_left_4",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 0,
-                "y": 285
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_walk_left_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 95,
-                "y": 285
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_idle_left_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 190,
-                "y": 285
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_idle_right_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 285,
-                "y": 285
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_walk_right_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 380,
-                "y": 0
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_idle_right_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 380,
-                "y": 95
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_walk_right_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 380,
-                "y": 190
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_idle_right_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 380,
-                "y": 285
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_down_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 0,
-                "y": 380
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_down_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 95,
-                "y": 380
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_down_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 190,
-                "y": 380
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_down_4",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 285,
-                "y": 380
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_down_5",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 380,
-                "y": 380
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_up_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 475,
-                "y": 0
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_up_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 475,
-                "y": 95
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_up_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 475,
-                "y": 190
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_up_4",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 475,
-                "y": 285
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_up_5",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 475,
-                "y": 380
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_left_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 0,
-                "y": 475
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_left_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 95,
-                "y": 475
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_left_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 190,
-                "y": 475
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_left_4",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 285,
-                "y": 475
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_left_5",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 380,
-                "y": 475
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_right_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 475,
-                "y": 475
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_right_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 570,
-                "y": 0
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_right_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 570,
-                "y": 95
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_right_4",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 570,
-                "y": 190
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_attack_right_5",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 570,
-                "y": 285
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_down_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 570,
-                "y": 380
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_down_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 570,
-                "y": 475
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_down_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 0,
-                "y": 570
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_down_4",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 95,
-                "y": 570
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_down_5",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 190,
-                "y": 570
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_up_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 285,
-                "y": 570
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_up_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 380,
-                "y": 570
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_up_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 475,
-                "y": 570
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_up_4",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 570,
-                "y": 570
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_up_5",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 665,
-                "y": 0
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_left_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 665,
-                "y": 95
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_left_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 665,
-                "y": 190
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_left_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 665,
-                "y": 285
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_left_4",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 665,
-                "y": 380
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_left_5",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 665,
-                "y": 475
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_right_1",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 665,
-                "y": 570
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_right_2",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 0,
-                "y": 665
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_right_3",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 95,
-                "y": 665
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_right_4",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 190,
-                "y": 665
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "knight_action_right_5",
-            "frame": {
-                "w": 95,
-                "h": 95,
-                "x": 285,
-                "y": 665
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        }
-    ],
-    "meta": {
-        "description": "Atlas generado con Atlas Packer Gamma V2",
-        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+  "frames": [
+    {
+      "filename": "knight_Idle_Down_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 0,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_walk_down_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 95,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_Idle_Down_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 0,
+        "y": 95
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_walk_down_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 95,
+        "y": 95
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_Idle_Down_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 190,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_idle_upward_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 190,
+        "y": 95
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_walk_up_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 0,
+        "y": 190
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_idle_upward_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 95,
+        "y": 190
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_walk_up_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 190,
+        "y": 190
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_idle_upward_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 285,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_idle_left_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 285,
+        "y": 95
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_walk_left_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 285,
+        "y": 190
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_idle_left_4",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 0,
+        "y": 285
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_walk_left_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 95,
+        "y": 285
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_idle_left_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 190,
+        "y": 285
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_idle_right_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 285,
+        "y": 285
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_walk_right_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 380,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_idle_right_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 380,
+        "y": 95
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_walk_right_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 380,
+        "y": 190
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_idle_right_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 380,
+        "y": 285
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_down_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 0,
+        "y": 380
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_down_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 95,
+        "y": 380
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_down_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 190,
+        "y": 380
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_down_4",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 285,
+        "y": 380
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_down_5",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 380,
+        "y": 380
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_up_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 475,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_up_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 475,
+        "y": 95
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_up_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 475,
+        "y": 190
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_up_4",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 475,
+        "y": 285
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_up_5",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 475,
+        "y": 380
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_left_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 0,
+        "y": 475
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_left_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 95,
+        "y": 475
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_left_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 190,
+        "y": 475
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_left_4",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 285,
+        "y": 475
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_left_5",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 380,
+        "y": 475
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_right_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 475,
+        "y": 475
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_right_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 570,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_right_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 570,
+        "y": 95
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_right_4",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 570,
+        "y": 190
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_attack_right_5",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 570,
+        "y": 285
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_down_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 570,
+        "y": 380
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_down_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 570,
+        "y": 475
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_down_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 0,
+        "y": 570
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_down_4",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 95,
+        "y": 570
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_down_5",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 190,
+        "y": 570
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_up_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 285,
+        "y": 570
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_up_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 380,
+        "y": 570
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_up_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 475,
+        "y": 570
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_up_4",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 570,
+        "y": 570
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_up_5",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 665,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_left_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 665,
+        "y": 95
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_left_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 665,
+        "y": 190
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_left_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 665,
+        "y": 285
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_left_4",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 665,
+        "y": 380
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_left_5",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 665,
+        "y": 475
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_right_1",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 665,
+        "y": 570
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_right_2",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 0,
+        "y": 665
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_right_3",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 95,
+        "y": 665
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_right_4",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 190,
+        "y": 665
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_action_right_5",
+      "frame": {
+        "w": 95,
+        "h": 95,
+        "x": 285,
+        "y": 665
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
     }
+  ],
+  "meta": {
+    "description": "Atlas generado con Atlas Packer Gamma V2",
+    "web": "https://gammafp.github.io/atlas-packer-phaser/"
+  }
 }
