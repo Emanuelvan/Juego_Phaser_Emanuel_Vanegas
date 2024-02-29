@@ -44,6 +44,9 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
     var valor = min + cambio * (max - min);
     return valor;
   }
+  luzJugador(){
+
+  }
 
   updatePlayerMovement() {
     this.setVelocityX(0);
@@ -83,7 +86,6 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
     } else {
       this.scene.cam.setRotation(this.rotacionCamara());
     }
-    console.log(this.direccion);
   }
   attack() {
     //Dependiendo de la ultima direccion ejecuta una animacion
