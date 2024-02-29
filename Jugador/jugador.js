@@ -11,7 +11,7 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
         this.velocity = 500;
         this.camaraTime = 0;
         this.direccion = "";
-        this.isTATAKAE = false;
+        this.isAttacking = false;
     }
 
     //Se crean las animacion para el persona, utilizando un atlas donde se determina cada animación por separado
@@ -52,7 +52,6 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
     updatePlayerMovement() {
         this.setVelocityX(0);
         this.setVelocityY(0);
-        let direccion ="";
         this.teclas = this.scene.input.keyboard.addKeys("W,A,S,D,SPACE");
         if (this.teclas.S.isDown) {
             this.setVelocityY(350)
@@ -80,7 +79,7 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
             this.attack();
         }
 
-        if (!this.teclas.S.isDown && !this.teclas.W.isDown && !this.teclas.A.isDown && !this.teclas.D.isDown && !this.isTATAKAE) {
+        if (!this.teclas.S.isDown && !this.teclas.W.isDown && !this.teclas.A.isDown && !this.teclas.D.isDown && !this.isAttacking) {
             this.play(this.animationNames["Idle_Down"], true);
         }
         else {
@@ -91,10 +90,10 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
     attack() {
         //Dependiendo de la ultima direccion ejecuta una animacion
         if(this.direccion){
-            this.isTATAKAE = true;
+            this.isAttacking = true;
             this.play(this.animationNames["attack_"+this.direccion], true);
             this.on("animationcomplete-"+this.animationNames["attack_"+this.direccion],()=>{
-                this.isTATAKAE = false;
+                this.isAttacking = false;
             })
         }
     }

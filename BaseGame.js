@@ -47,7 +47,7 @@ class Juego_Principal extends Phaser.Scene {
     cam;
     layer;
     BackgroundMusic;
-
+    minimap;
 
     preload() {
         this.load.spritesheet("personaje", 'Assets/Personaje/knight1.png', {
@@ -72,7 +72,7 @@ class Juego_Principal extends Phaser.Scene {
         var tileset = this.mapa.addTilesetImage('tiles', 'tiles', 16, 16);
         this.layer = this.mapa.createBlankLayer('Layer 1', tileset);
         this.BackgroundMusic = this.sound.add("Ambiente") 
-        this.BackgroundMusic.play({loop:true, volume: 0.1});//Volumen del audio
+        this.BackgroundMusic.play({loop:true, volume: 0.0});//Volumen del audio
         if (!debug) {
             this.layer.setScale(5);
         }
@@ -199,8 +199,17 @@ class Juego_Principal extends Phaser.Scene {
 
         info.setScrollFactor(0);
 
+        //Se crea el minimapa
+        this.minimap = new Minimap(200, 10, 100, 100).setZoom(0.2);
+        this.minimap.setBackgroundColor('#ffff00')
+        console.log(this.minimap)
+        this.cameras.addExisting(this.minimap);
+/*         this.minimap = this.cameras.add(200, 10, 100, 100).setZoom(0.2);
+        this.minimap.setBackgroundColor('#ffff00'); */
     }
     update(time) {
+        //Se actualiza la posicion en el minimapa
+        this.minimap.actulizarPosMinimap();
         //Se actuliza la posisición del jugador
         this.jugador.updatePlayerMovement(time);
         var playerTileX = this.mapa.worldToTileX(this.jugador.x);
