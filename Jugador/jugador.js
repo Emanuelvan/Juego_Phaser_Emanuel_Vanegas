@@ -12,6 +12,8 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
     this.camaraTime = 0;
     this.direccion = "";
     this.isAttacking = false;
+    this.rotCam = 0;
+    this.PlayerMove = false;
   }
 
   //Se crean las animacion para el persona, utilizando un atlas donde se determina cada animación por separado
@@ -33,58 +35,55 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
   }
   //Funcion para rotar constantemente la camara cada vez que el jugador se mueve
   rotacionCamara() {
-    var min = -0.045;
-    var max = 0.045;
+    var min = -0.025;
+    var max = 0.025;
     var VelocidadCamRo = 0.015;
     if (this.camaraTime > 2 * Math.PI) {
       this.camaraTime = 0;
     }
-    this.camaraTime += VelocidadCamRo;
+    if (this.PlayerMove == true) {
+      this.camaraTime += VelocidadCamRo;
+    }
     var cambio = (Math.sin(this.camaraTime) + 1) / 2;
     var valor = min + cambio * (max - min);
-    return valor;
+    return (this.rotCam = valor);
   }
-  luzJugador(){
-
-  }
-
   updatePlayerMovement() {
-    this.setVelocityX(0);
-    this.setVelocityY(0);
     this.teclas = this.scene.input.keyboard.addKeys("W,A,S,D,SPACE");
-    if (this.teclas.S.isDown) {
-      this.setVelocityY(350);
-      this.play(this.animationNames["walk_down"], true);
-      this.direccion = "down";
-    } else if (this.teclas.W.isDown) {
-      this.setVelocityY(-350);
-      this.play(this.animationNames["walk_up"], true);
-      this.direccion = "up";
-    }
+    this.body.setVelocity(0);
     if (this.teclas.A.isDown) {
-      this.setVelocityX(-350);
-      this.play(this.animationNames["walk_left"], true);
-      this.direccion = "left";
+      this.body.setVelocityX(-350);
+      this.PlayerMove = true;
+      this.scene.cam.setRotation(this.rotacionCamara());
     } else if (this.teclas.D.isDown) {
-      this.play(this.animationNames["walk_right"], true);
-      this.setVelocityX(350);
-      this.direccion = "right";
+      this.body.setVelocityX(350);
+      this.PlayerMove = true;
+      this.scene.cam.setRotation(this.rotacionCamara());
     }
-    //Control de ataque
-    if (this.teclas.SPACE.isDown) {
-      this.attack();
+    if (this.teclas.W.isDown) {
+      this.body.setVelocityY(-350);
+      this.PlayerMove = true;
+      this.scene.cam.setRotation(this.rotacionCamara());
+    } else if (this.teclas.S.isDown) {
+      this.body.setVelocityY(350);
+      this.PlayerMove = true;
+      this.scene.cam.setRotation(this.rotacionCamara());
     }
 
-    if (
-      !this.teclas.S.isDown &&
-      !this.teclas.W.isDown &&
-      !this.teclas.A.isDown &&
-      !this.teclas.D.isDown &&
-      !this.isAttacking
-    ) {
-      this.play(this.animationNames["Idle_Down"], true);
+    //
+
+    if (this.teclas.A.isDown) {
+      this.anims.play(this.animationNames["walk_left"], true);
+    } else if (this.teclas.D.isDown) {
+      this.anims.play(this.animationNames["walk_right"], true);
+    } else if (this.teclas.W.isDown) {
+      this.anims.play(this.animationNames["walk_up"], true);
+    } else if (this.teclas.S.isDown) {
+      this.anims.play(this.animationNames["walk_down"], true);
     } else {
-      this.scene.cam.setRotation(this.rotacionCamara());
+      //this.anims.stop();
+      this.anims.play(this.animationNames["Idle_Down"], true);
+      this.PlayerMove = false;
     }
   }
   attack() {
@@ -101,3 +100,15 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
     }
   }
 }
+
+/* if (
+  !this.teclas.S.isDown &&
+  !this.teclas.W.isDown &&
+  !this.teclas.A.isDown &&
+  !this.teclas.D.isDown &&
+  !this.isAttacking
+) {
+  this.play(this.animationNames["Idle_Down"], true);
+} else {
+  this.scene.cam.setRotation(this.rotacionCamara());
+}  */
