@@ -51,6 +51,10 @@ class Juego_Principal extends Phaser.Scene {
   info;
   luces;
 
+  constructor() {
+    super({ key: "Juego_Principal" });
+  }
+
   preload() {
     this.load.spritesheet("personaje", "Assets/Personaje/knight1.png", {
       frameWidth: 72,
@@ -74,8 +78,8 @@ class Juego_Principal extends Phaser.Scene {
       width: 50,
       height: 50,
       cuartos: {
-        width: { min: 2, max: 4, onlyOdd: true },
-        height: { min: 2, max: 4, onlyOdd: true },
+        width: { min: 8, max: 10, onlyOdd: true },
+        height: { min: 8, max: 10, onlyOdd: false },
       },
     });
     this.mapa = this.make.tilemap({
@@ -205,6 +209,7 @@ class Juego_Principal extends Phaser.Scene {
     if (!debug) {
       this.setRoomAlpha(playerRoom, 1); // Muestra la primera habitación
     }
+    //Texto guia de botones
 
     //Se crea la camara dandole limites del tamaño maximo de la layer del mapa asi como tambien que siga al jugador
     this.cam = this.cameras.main;
@@ -217,17 +222,13 @@ class Juego_Principal extends Phaser.Scene {
       )
       .setName("Camara Principal");
     this.cam = this.cameras.main.startFollow(this.jugador, false, 0.1, 0.1);
-    //Texto guia de botones
-    this.info = this.add.text(
-      300,
-      16,
-      "Usa WASD para moverte y ESPACIO para atacar",
-      {
+    this.info = this.add
+      .text(300, 16, "Usa WASD para moverte y ESPACIO para atacar", {
         padding: { x: 5, y: 5 },
         backgroundColor: "#ffffff",
         fill: "#000000",
-      }
-    );
+      })
+      .setDepth(0);
     this.info.setScrollFactor(0);
     //Se crea el minimapa
     this.minimap = new Minimap(800, 30, 200, 200)
@@ -240,12 +241,9 @@ class Juego_Principal extends Phaser.Scene {
   }
 
   update() {
-    //console.log("Luz X", this.luces.x, "Jugado X", this.jugador.x);
-    console.log(this.jugador.rotCam);
     //Crear una luz para el jugador;
     this.luces.x = this.jugador.x - this.jugador.rotacionCamara();
     this.luces.y = this.jugador.y + this.jugador.rotacionCamara();
-    //console.log("Luz X",this.luces.x,"Luz Y",this.luces.y,this.jugador.x,this.jugador.y);
     //Se actualiza la posicion en el minimapa
     this.minimap.actulizarPosMinimap(this.jugador);
     //Se actuliza la posisición del jugador
@@ -301,7 +299,7 @@ const config = {
   parent: "Juego Dungeon Emanuel",
   pixelArt: true,
   roundPixels: true,
-  scene: Juego_Principal,
+  scene: [Menu_Inicio, Juego_Principal],
   physics: {
     default: "arcade",
     arcade: {

@@ -35,9 +35,9 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
   }
   //Funcion para rotar constantemente la camara cada vez que el jugador se mueve
   rotacionCamara() {
-    var min = -0.025;
-    var max = 0.025;
-    var VelocidadCamRo = 0.015;
+    var min = -0.045;
+    var max = 0.045;
+    var VelocidadCamRo = 0.0075;
     if (this.camaraTime > 2 * Math.PI) {
       this.camaraTime = 0;
     }
