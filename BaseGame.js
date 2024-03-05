@@ -78,7 +78,7 @@ class Juego_Principal extends Phaser.Scene {
       width: 50,
       height: 50,
       cuartos: {
-        width: { min: 8, max: 10, onlyOdd: true },
+        width: { min: 10, max: 10, onlyOdd: true },
         height: { min: 8, max: 10, onlyOdd: false },
       },
     });
@@ -147,17 +147,17 @@ class Juego_Principal extends Phaser.Scene {
       } else if (rand <= 0.6) {
         if (cuarto.height >= 9) {
           // Crea torres de forma aleatoria en el centro de los cuartos
-          this.layer.putTilesAt([[74], [98]], cx - 1, cy + 1);
+          this.layer.putTilesAt([[74], [98]], cx, cy);
 
-          this.layer.putTilesAt([[74], [98]], cx + 1, cy + 1);
+          this.layer.putTilesAt([[74], [98]], cx, cy);
 
-          this.layer.putTilesAt([[74], [98]], cx - 1, cy - 2);
+          this.layer.putTilesAt([[74], [98]], cx, cy);
 
-          this.layer.putTilesAt([[74], [98]], cx + 1, cy - 2);
+          this.layer.putTilesAt([[74], [98]], cx, cy);
         } else {
-          this.layer.putTilesAt([[74], [98]], cx - 1, cy - 1);
+          this.layer.putTilesAt([[74], [98]], cx, cy);
 
-          this.layer.putTilesAt([[74], [98]], cx + 1, cy - 1);
+          this.layer.putTilesAt([[74], [98]], cx, cy);
         }
       }
     }, this);
