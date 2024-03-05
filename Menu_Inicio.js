@@ -13,6 +13,10 @@ class Menu_Inicio extends Phaser.Scene {
     this.load.image("Fondo Inicio", "Assets/Fondos/Menu_Inicio_Background.jpg");
     this.load.image("Espada Opcion", "Assets/Botones/Espada.png");
     this.load.image("Boton Inicio", "Assets/Botones/Iniciar_Boton.png");
+    this.load.audio(
+      "Ambiente",
+      "Audio/Music/Old RuneScape Soundtrack Crystal Sword.mp3"
+    );
   }
   crearMenuInicio() {
     this.OpcionEspada = this.add
@@ -40,6 +44,7 @@ class Menu_Inicio extends Phaser.Scene {
     this.BotonIniciar.on("pointerup", () => {
       this.scene.start("Juego_Principal", Juego_Principal, true);
       this.scene.stop();
+      this.BackgroundMusic.stop();
     });
     //Titulo
     this.TituloTexto = this.add
@@ -59,15 +64,19 @@ class Menu_Inicio extends Phaser.Scene {
       yoyo: true,
       repeat: -1,
     });
+    this.BackgroundMusic.play({ loop: true, volume: 0.0 });
   }
 
   create() {
+    //Musica del menu
+    this.BackgroundMusic = this.sound.add("Ambiente");
     this.timeEvent = this.time.delayedCall(
       2000,
       this.crearMenuInicio,
       [],
       this
     );
+
     //Efectos Boton Inicio
     /*     Boton_Inicio.setAngle(-5);
     this.add.tween({

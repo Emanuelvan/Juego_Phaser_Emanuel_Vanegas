@@ -66,13 +66,12 @@ class Juego_Principal extends Phaser.Scene {
       "Jugador/Animaciones/Animacion_Knight.png",
       "Jugador/Animaciones/Animacion_Knight.json"
     );
-    this.load.audio(
-      "Ambiente",
-      "Audio/Music/Old RuneScape Soundtrack Crystal Sword.mp3"
-    );
+    this.load.audio("Gameplay", "Audio/Music/Cave Background.mp3");
   }
 
   create() {
+    this.BackgroundMusic = this.sound.add("Gameplay");
+    this.BackgroundMusic.play({ loop: true, volume: 0.0 });
     this.lights.enable();
     this.mazmorra = new Dungeon({
       width: 50,
@@ -89,12 +88,11 @@ class Juego_Principal extends Phaser.Scene {
       height: this.mazmorra.height,
     });
     var tileset = this.mapa.addTilesetImage("tiles", "tiles", 16, 16);
-    this.layer = this.mapa.createBlankLayer("Layer 1", tileset);
-    //.setPipeline("Light2D");
-    this.BackgroundMusic = this.sound.add("Ambiente");
-    this.BackgroundMusic.play({ loop: true, volume: 0.0 }); //Volumen del audio
+    this.layer = this.mapa
+      .createBlankLayer("Layer 1", tileset)
+      .setPipeline("Light2D");
     if (!debug) {
-      this.layer.setScale(5);
+      this.layer.setScale(1);
     }
     this.layer.fill(2);
     this.mazmorra.rooms.forEach(function (cuarto) {
@@ -201,9 +199,10 @@ class Juego_Principal extends Phaser.Scene {
 
     //Se crea la luz
     this.luces = this.lights
-      .addLight(0, 0, 500)
+      .addLight(0, 0, 200)
       .setColor(0x979fad)
-      .setIntensity(3.0);
+      .setIntensity(10)
+      .setRadius(50);
     //.setScrollFactor(0.0);
 
     if (!debug) {
@@ -222,6 +221,7 @@ class Juego_Principal extends Phaser.Scene {
       )
       .setName("Camara Principal");
     this.cam = this.cameras.main.startFollow(this.jugador, false, 0.1, 0.1);
+    this.cam.setZoom(5);
     this.info = this.add
       .text(300, 16, "Usa WASD para moverte y ESPACIO para atacar", {
         padding: { x: 5, y: 5 },
@@ -232,7 +232,7 @@ class Juego_Principal extends Phaser.Scene {
     this.info.setScrollFactor(0);
     //Se crea el minimapa
     this.minimap = new Minimap(800, 30, 200, 200)
-      .setZoom(0.1)
+      .setZoom(0.5)
       .setName("miniMap")
       .setBackgroundColor("#6f7e87");
     this.cameras.addExisting(this.minimap);
@@ -244,6 +244,12 @@ class Juego_Principal extends Phaser.Scene {
     //Crear una luz para el jugador;
     this.luces.x = this.jugador.x - this.jugador.rotacionCamara();
     this.luces.y = this.jugador.y + this.jugador.rotacionCamara();
+    console.log(
+      this.luces.Origin,
+      this.luces.y,
+      this.jugador.x,
+      this.jugador.y
+    );
     //Se actualiza la posicion en el minimapa
     this.minimap.actulizarPosMinimap(this.jugador);
     //Se actuliza la posisición del jugador
