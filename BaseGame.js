@@ -36,6 +36,7 @@ const TILES = {
     { index: 185, weight: 1 },
     { index: 186, weight: 1 },
   ],
+  ESCALERAS: 209,
 };
 
 class Juego_Principal extends Phaser.Scene {
@@ -50,6 +51,10 @@ class Juego_Principal extends Phaser.Scene {
   minimap;
   info;
   luces;
+  cuarto;
+  cuartoInicio;
+  cuartoFinal;
+  otrosCuartos;
 
   constructor() {
     super({ key: "Juego_Principal" });
@@ -74,11 +79,18 @@ class Juego_Principal extends Phaser.Scene {
     this.BackgroundMusic.play({ loop: true, volume: 0.0 });
     this.lights.enable();
     this.mazmorra = new Dungeon({
+      // El tamaño general del grid
       width: 50,
       height: 50,
-      cuartos: {
-        width: { min: 10, max: 10, onlyOdd: true },
-        height: { min: 8, max: 10, onlyOdd: false },
+      doorPadding: 2,
+      rooms: {
+        // Rango del ancho de las habitaciones
+        rooms: {
+          width: { min: 7, max: 15, onlyOdd: true },
+          height: { min: 7, max: 15, onlyOdd: true },
+        },
+        // Cantidad maxima de cuartos
+        //maxRooms: 10,
       },
     });
     this.mapa = this.make.tilemap({
@@ -88,13 +100,24 @@ class Juego_Principal extends Phaser.Scene {
       height: this.mazmorra.height,
     });
     var tileset = this.mapa.addTilesetImage("tiles", "tiles", 16, 16);
-    this.layer = this.mapa
-      .createBlankLayer("Layer 1", tileset)
-      .setPipeline("Light2D");
-    if (!debug) {
-      this.layer.setScale(1);
-    }
+    this.layer = this.mapa.createBlankLayer("Layer 1", tileset);
+    //.setPipeline("Light2D");
+    this.layer.setScale(1);
     this.layer.fill(2);
+
+    //Se crea un indexes especifico para crear un final de la mazmorra
+    this.cuartos = this.mazmorra.rooms.slice(); // Crea una copia del array donde se guarda las habitaciones
+    this.cuartoInicio = this.cuartos.shift(); // Quita la primera posicion del array, es decir el cuarto del inicio
+    this.cuartoFinal = Phaser.Utils.Array.RemoveRandomElement(this.cuartos); // Toma un elemento aleatorio del array
+    this.otrosCuartos = Phaser.Utils.Array.Shuffle(this.cuartos).slice(
+      // Mezcla los valores del arreglo y toma un valor de esto desde la primera posicion hasta el largo menos la ultima posicion
+      0,
+      this.cuartos.length * 0.9
+    );
+    //console.log(this.cuartoFinal);
+
+    //
+
     this.mazmorra.rooms.forEach(function (cuarto) {
       var x = cuarto.x;
       var y = cuarto.y;
@@ -106,7 +129,16 @@ class Juego_Principal extends Phaser.Scene {
       var right = x + (w - 1);
       var top = y;
       var bottom = y + (h - 1);
-
+      console.log(
+        "cx",
+        cx,
+        "cy",
+        cy,
+        "cuartoFX",
+        this.cuartoFinal.centerX,
+        "cuartoFY",
+        this.cuartoFinal.centerY
+      );
       this.mapa.weightedRandomize(TILES.FLOOR, x, y, w, h);
 
       // Las tiles del borde del mapa
@@ -133,32 +165,43 @@ class Juego_Principal extends Phaser.Scene {
       for (var i = 0; i < doors.length; i++) {
         this.mapa.putTileAt(25, x + doors[i].x, y + doors[i].y);
       }
+    }, this);
 
+    this.layer.putTileAt(
+      TILES.ESCALERAS,
+      this.cuartoFinal.centerX,
+      this.cuartoFinal.centerY
+    );
+
+    //
+
+    this.otrosCuartos.forEach((cuarto) => {
       // Pone objetos de forma aleatoria en los cuartos
       var rand = Math.random();
+
       if (rand <= 0.25) {
-        this.layer.putTileAt(154, cx, cy); // Cubo de Liz en la mitad del cuarto
+        this.layer.putTileAt(154, cuarto.centerX, cuarto.centerY); // Cubo de Luz en la mitad del cuarto
       } else if (rand <= 0.25) {
-        this.layer.putTileAt(182, cx, cy); // Caja xd
+        this.layer.putTileAt(182, cuarto.centerX, cuarto.centerY);
       } else if (rand <= 0.4) {
-        this.layer.putTileAt(211, cx, cy); // Armadura
+        this.layer.putTileAt(211, cuarto.centerX, cuarto.centerY);
       } else if (rand <= 0.6) {
         if (cuarto.height >= 9) {
           // Crea torres de forma aleatoria en el centro de los cuartos
-          this.layer.putTilesAt([[74], [98]], cx, cy);
+          this.layer.putTilesAt([[74], [98]], cuarto.centerX, cuarto.centerY);
 
-          this.layer.putTilesAt([[74], [98]], cx, cy);
+          this.layer.putTilesAt([[74], [98]], cuarto.centerX, cuarto.centerY);
 
-          this.layer.putTilesAt([[74], [98]], cx, cy);
+          this.layer.putTilesAt([[74], [98]], cuarto.centerX, cuarto.centerY);
 
-          this.layer.putTilesAt([[74], [98]], cx, cy);
+          this.layer.putTilesAt([[74], [98]], cuarto.centerX, cuarto.centerY);
         } else {
-          this.layer.putTilesAt([[74], [98]], cx, cy);
+          this.layer.putTilesAt([[74], [98]], cuarto.centerX, cuarto.centerY);
 
-          this.layer.putTilesAt([[74], [98]], cx, cy);
+          this.layer.putTilesAt([[74], [98]], cuarto.centerX, cuarto.centerY);
         }
       }
-    }, this);
+    });
 
     this.layer.setCollisionByExclusion([25, 207, 183, 184, 185, 186]);
     if (!debug) {
@@ -185,7 +228,7 @@ class Juego_Principal extends Phaser.Scene {
       "action_left",
       "action_right",
     ];
-    var playerRoom = this.mazmorra.rooms[0];
+    var playerRoom = this.cuartoInicio;
 
     //Se crea al jugador
     this.jugador = new jugador(
@@ -241,15 +284,11 @@ class Juego_Principal extends Phaser.Scene {
   }
 
   update() {
+    console.log(this.jugador.x, this.jugador.y);
+    //console.log(this.cuartoInicio);
     //Crear una luz para el jugador;
     this.luces.x = this.jugador.x - this.jugador.rotacionCamara();
     this.luces.y = this.jugador.y + this.jugador.rotacionCamara();
-    console.log(
-      this.luces.Origin,
-      this.luces.y,
-      this.jugador.x,
-      this.jugador.y
-    );
     //Se actualiza la posicion en el minimapa
     this.minimap.actulizarPosMinimap(this.jugador);
     //Se actuliza la posisición del jugador
@@ -305,7 +344,7 @@ const config = {
   parent: "Juego Dungeon Emanuel",
   pixelArt: true,
   roundPixels: true,
-  scene: [Menu_Inicio, Juego_Principal],
+  scene: [/* Menu_Inicio, */ Juego_Principal],
   physics: {
     default: "arcade",
     arcade: {
