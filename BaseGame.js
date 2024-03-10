@@ -1,5 +1,3 @@
-const debug = false;
-
 const TILES = {
   TOP_LEFT_WALL: 0,
   TOP_RIGHT_WALL: 2,
@@ -8,7 +6,6 @@ const TILES = {
   TOP_WALL: [
     { index: 1, weight: 4 },
     { index: 170, weight: 1 },
-    { index: 169, weight: 1 },
     { index: 1, weight: 1 },
   ],
   LEFT_WALL: [
@@ -37,7 +34,9 @@ const TILES = {
     { index: 186, weight: 1 },
   ],
   ESCALERAS: 209,
+  ESCALERAS_CERRADAS: 233,
 };
+const debug = false;
 
 class Juego_Principal extends Phaser.Scene {
   activeRoom;
@@ -55,9 +54,11 @@ class Juego_Principal extends Phaser.Scene {
   cuartoInicio;
   cuartoFinal;
   otrosCuartos;
+  escalaresEncontras = false;
 
   constructor() {
     super({ key: "Juego_Principal" });
+    this.nivel = 0;
   }
 
   preload() {
@@ -65,6 +66,7 @@ class Juego_Principal extends Phaser.Scene {
       frameWidth: 72,
       frameHeight: 72,
     });
+    this.load.image("Llave", "Assets/Llave/Llave.png");
     this.load.image("tiles", "Assets/Tiles_Map/dungeon_sheet.png");
     this.load.atlas(
       "PlayerAnimation",
@@ -75,6 +77,25 @@ class Juego_Principal extends Phaser.Scene {
   }
 
   create() {
+    let playerList = [
+      "Idle_Down",
+      "walk_down",
+      "idle_upward",
+      "walk_up",
+      "idle_upward",
+      "idle_left",
+      "walk_left",
+      "idle_right",
+      "walk_right",
+      "attack_down",
+      "attack_up",
+      "attack_left",
+      "attack_right",
+      "action_down",
+      "action_up",
+      "action_left",
+      "action_right",
+    ];
     this.BackgroundMusic = this.sound.add("Gameplay");
     this.BackgroundMusic.play({ loop: true, volume: 0.0 });
     this.lights.enable();
@@ -82,15 +103,15 @@ class Juego_Principal extends Phaser.Scene {
       // El tamaño general del grid
       width: 50,
       height: 50,
-      doorPadding: 2,
+      doorPadding: 1,
       rooms: {
         // Rango del ancho de las habitaciones
         rooms: {
-          width: { min: 7, max: 15, onlyOdd: true },
-          height: { min: 7, max: 15, onlyOdd: true },
+          width: { min: 9, max: 15, onlyOdd: false },
+          height: { min: 9, max: 15, onlyOdd: false },
         },
         // Cantidad maxima de cuartos
-        //maxRooms: 10,
+        maxRooms: 3,
       },
     });
     this.mapa = this.make.tilemap({
@@ -100,10 +121,10 @@ class Juego_Principal extends Phaser.Scene {
       height: this.mazmorra.height,
     });
     var tileset = this.mapa.addTilesetImage("tiles", "tiles", 16, 16);
-    this.layer = this.mapa.createBlankLayer("Layer 1", tileset);
-    //.setPipeline("Light2D");
+    this.layer = this.mapa.createBlankLayer("Escenario", tileset);
+    /* .setPipeline("Light2D"); */
     this.layer.setScale(1);
-    this.layer.fill(2);
+    //this.layer.fill(2);
 
     //Se crea un indexes especifico para crear un final de la mazmorra
     this.cuartos = this.mazmorra.rooms.slice(); // Crea una copia del array donde se guarda las habitaciones
@@ -114,7 +135,6 @@ class Juego_Principal extends Phaser.Scene {
       0,
       this.cuartos.length * 0.9
     );
-    //console.log(this.cuartoFinal);
 
     //
 
@@ -129,16 +149,6 @@ class Juego_Principal extends Phaser.Scene {
       var right = x + (w - 1);
       var top = y;
       var bottom = y + (h - 1);
-      console.log(
-        "cx",
-        cx,
-        "cy",
-        cy,
-        "cuartoFX",
-        this.cuartoFinal.centerX,
-        "cuartoFY",
-        this.cuartoFinal.centerY
-      );
       this.mapa.weightedRandomize(TILES.FLOOR, x, y, w, h);
 
       // Las tiles del borde del mapa
@@ -166,7 +176,6 @@ class Juego_Principal extends Phaser.Scene {
         this.mapa.putTileAt(25, x + doors[i].x, y + doors[i].y);
       }
     }, this);
-
     this.layer.putTileAt(
       TILES.ESCALERAS,
       this.cuartoFinal.centerX,
@@ -178,8 +187,7 @@ class Juego_Principal extends Phaser.Scene {
     this.otrosCuartos.forEach((cuarto) => {
       // Pone objetos de forma aleatoria en los cuartos
       var rand = Math.random();
-
-      if (rand <= 0.25) {
+      if (rand <= 0.9) {
         this.layer.putTileAt(154, cuarto.centerX, cuarto.centerY); // Cubo de Luz en la mitad del cuarto
       } else if (rand <= 0.25) {
         this.layer.putTileAt(182, cuarto.centerX, cuarto.centerY);
@@ -202,32 +210,14 @@ class Juego_Principal extends Phaser.Scene {
         }
       }
     });
-
+    //Colision de las tiles
     this.layer.setCollisionByExclusion([25, 207, 183, 184, 185, 186]);
+
     if (!debug) {
       this.layer.forEachTile((tile) => {
         tile.alpha = 0;
       });
     }
-    let playerList = [
-      "Idle_Down",
-      "walk_down",
-      "idle_upward",
-      "walk_up",
-      "idle_upward",
-      "idle_left",
-      "walk_left",
-      "idle_right",
-      "walk_right",
-      "attack_down",
-      "attack_up",
-      "attack_left",
-      "attack_right",
-      "action_down",
-      "action_up",
-      "action_left",
-      "action_right",
-    ];
     var playerRoom = this.cuartoInicio;
 
     //Se crea al jugador
@@ -239,6 +229,14 @@ class Juego_Principal extends Phaser.Scene {
     ).setPipeline("Light2D");
 
     this.jugador.animationCharacter(playerList);
+    console.log(this.jugador.pickKey);
+    //Creamos la llave
+    this.llave = new Llave(
+      this,
+      this.mapa.tileToWorldX(playerRoom.x + 3),
+      this.mapa.tileToWorldY(playerRoom.y + 4),
+      "Llave"
+    );
 
     //Se crea la luz
     this.luces = this.lights
@@ -272,7 +270,7 @@ class Juego_Principal extends Phaser.Scene {
         fill: "#000000",
       })
       .setDepth(0);
-    this.info.setScrollFactor(0);
+    this.info.setScrollFactor(1);
     //Se crea el minimapa
     this.minimap = new Minimap(800, 30, 200, 200)
       .setZoom(0.5)
@@ -283,16 +281,36 @@ class Juego_Principal extends Phaser.Scene {
     //this.minimap.ignore();
   }
 
-  update() {
-    console.log(this.jugador.x, this.jugador.y);
-    //console.log(this.cuartoInicio);
+  update(time, delta) {
+    if (this.jugador.pickKey) {
+      /*       this.layer.removeTileAt(
+        this.cuartoFinal.centerX,
+        this.cuartoFinal.centerY
+      ); */
+      /*       this.layer.putTileAt(
+        TILES.ESCALERAS,
+        this.cuartoFinal.centerX,
+        this.cuartoFinal.centerY
+      ); */
+      /*       this.layer.setTileIndexCallback(TILES.ESCALERAS, () => {
+        this.layer.setTileIndexCallback(TILES.ESCALERAS, null);
+        this.escalaresEncontras = true;
+        const cam = this.cameras.main;
+        cam.fade(500, 0, 0, 0);
+        cam.once("camerafadeoutcomplete", () => {
+          //this.setRoomAlpha(this.mazmorra.rooms, 0);
+          this.scene.restart();
+        });
+      }); */
+    }
     //Crear una luz para el jugador;
     this.luces.x = this.jugador.x - this.jugador.rotacionCamara();
     this.luces.y = this.jugador.y + this.jugador.rotacionCamara();
     //Se actualiza la posicion en el minimapa
     this.minimap.actulizarPosMinimap(this.jugador);
     //Se actuliza la posisición del jugador
-    this.jugador.updatePlayerMovement();
+    this.jugador.update();
+    //
     var playerTileX = this.mapa.worldToTileX(this.jugador.x);
     var playerTileY = this.mapa.worldToTileY(this.jugador.y);
     //Un metodo que ayuda a generar las habitaciones creando el cuarto al momento que el jugador entra a la habitación
@@ -302,15 +320,12 @@ class Juego_Principal extends Phaser.Scene {
       //Hace que el cuarto anterior se oscurezca
       if (!debug) {
         this.setRoomAlpha(room, 1);
-        this.setRoomAlpha(this.activeRoom, 0.5);
+        this.setRoomAlpha(this.activeRoom, 0.2);
       }
     }
 
     this.activeRoom = room;
-    // La camara sigue al jugador
-    //this.cameras.main.startFollow(this.jugador, false, 0.2, 0.2);
   }
-
   setRoomAlpha(room, alpha) {
     this.mapa.forEachTile(
       function (tile) {
@@ -325,9 +340,7 @@ class Juego_Principal extends Phaser.Scene {
   }
 
   isTileOpenAt(worldX, worldY) {
-    // nonNull = true, don't return null for empty tiles. This means null will be returned only for
-    // tiles outside of the bounds of the mapa.
-    var tile = this.mapa.getTileAtWorldXY(worldX, worldY, true);
+    var tile = mapa.getTileAtWorldXY(worldX, worldY, true);
     if (tile && !tile.collides) {
       return true;
     } else {
@@ -344,7 +357,7 @@ const config = {
   parent: "Juego Dungeon Emanuel",
   pixelArt: true,
   roundPixels: true,
-  scene: [/* Menu_Inicio, */ Juego_Principal],
+  scene: [/* Menu_Inicio */ Juego_Principal],
   physics: {
     default: "arcade",
     arcade: {

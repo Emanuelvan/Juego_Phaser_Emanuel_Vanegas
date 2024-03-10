@@ -4,6 +4,7 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this, false);
     scene.physics.add.collider(this, this.scene.layer);
+    scene.physics.add.collider(this);
     //Se cambia el tamaño al hitbox del personaje así como tambien la posición
     this.body.setSize(32, 32);
     this.body.setOffset(35, 65);
@@ -15,6 +16,15 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
     this.rotCam = 0;
     this.PlayerMove = false;
     this.setScale(0.2);
+    this.pickKey = false;
+  }
+  update() {
+    this.updatePlayerMovement();
+    this.scene.physics.overlap(this, this.scene.llave, (player, llave) => {
+      llave.destroy();
+      this.pickKey = true;
+      console.log("Llave recogida xd");
+    });
   }
 
   //Se crean las animacion para el persona, utilizando un atlas donde se determina cada animación por separado
@@ -101,15 +111,3 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
     }
   }
 }
-
-/* if (
-  !this.teclas.S.isDown &&
-  !this.teclas.W.isDown &&
-  !this.teclas.A.isDown &&
-  !this.teclas.D.isDown &&
-  !this.isAttacking
-) {
-  this.play(this.animationNames["Idle_Down"], true);
-} else {
-  this.scene.cam.setRotation(this.rotacionCamara());
-}  */
