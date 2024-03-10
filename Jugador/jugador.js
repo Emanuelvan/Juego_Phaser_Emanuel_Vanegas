@@ -23,7 +23,6 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.overlap(this, this.scene.llave, (player, llave) => {
       llave.destroy();
       this.pickKey = true;
-      console.log("Llave recogida xd");
     });
   }
 
@@ -48,7 +47,7 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
   rotacionCamara() {
     var min = -0.045;
     var max = 0.045;
-    var VelocidadCamRo = 0.009;
+    var VelocidadCamRo = 0.0;
     if (this.camaraTime > 2 * Math.PI) {
       this.camaraTime = 0;
     }
