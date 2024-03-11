@@ -58,6 +58,7 @@ class Juego_Principal extends Phaser.Scene {
   cuartoFinal;
   otrosCuartos;
   escalaresEncontras = false;
+  enemigo;
 
   constructor() {
     super({ key: "Juego_Principal" });
@@ -76,6 +77,11 @@ class Juego_Principal extends Phaser.Scene {
         frameWidth: 32,
         frameHeight: 32,
       }
+    );
+    this.load.atlas(
+      "EnemyAnimation",
+      "Assets/Enemigos/Slime/Animaciones/Animacion_Slime.png",
+      "Assets/Enemigos/Slime/Animaciones/Animacion_Slime.json"
     );
     this.load.image("Llave", "Assets/Llave/Llave.png");
     this.load.image(
@@ -112,6 +118,7 @@ class Juego_Principal extends Phaser.Scene {
       "action_left",
       "action_right",
     ];
+    let enemyList = ["Idle", "move", "attack", "dead"];
     this.BackgroundMusic = this.sound.add("Gameplay");
     this.BackgroundMusic.play({ loop: true, volume: 0.0 });
     this.lights.enable();
@@ -260,7 +267,25 @@ class Juego_Principal extends Phaser.Scene {
       this.mapa.tileToWorldY(playerRoom.y + 4),
       "Llave"
     );
+    //Se crea los enemigos
+    /*     this.enemigo = this.add.group({
+      className: slime,
+      key: "Enemigo",
+      maxSize: 2,
+      repeat: 2,
+      active: false,
+      visible: false,
+      runChildUpdate: true,
+    });
 
+    this.enemigo.add(); */
+    this.enemigo = new slime(
+      this,
+      this.mapa.tileToWorldX(playerRoom.x + 4),
+      this.mapa.tileToWorldY(playerRoom.y + 4),
+      "Enemigo"
+    );
+    this.enemigo.animationEnemigo(enemyList);
     //Se crea la luz
     this.luces = this.lights
       .addLight(0, 0, 200)
@@ -332,6 +357,8 @@ class Juego_Principal extends Phaser.Scene {
     this.minimap.actulizarPosMinimap(this.jugador);
     //Se actuliza la posisición del jugador
     this.jugador.update();
+    //
+    this.enemigo.update();
     //
     var playerTileX = this.mapa.worldToTileX(this.jugador.x);
     var playerTileY = this.mapa.worldToTileY(this.jugador.y);

@@ -39,7 +39,7 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
           end: 4,
           prefix: "knight_" + name + "_",
         }),
-        frameRate: 6,
+        frameRate: 5,
       });
     }
   }
@@ -47,7 +47,7 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
   rotacionCamara() {
     var min = -0.045;
     var max = 0.045;
-    var VelocidadCamRo = 0.0;
+    var VelocidadCamRo = 0.005; //0.004
     if (this.camaraTime > 2 * Math.PI) {
       this.camaraTime = 0;
     }
