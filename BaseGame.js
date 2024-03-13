@@ -59,10 +59,12 @@ class Juego_Principal extends Phaser.Scene {
   otrosCuartos;
   escalaresEncontras = false;
   enemigo;
+  habitacionesConEnemigos;
 
   constructor() {
     super({ key: "Juego_Principal" });
     this.nivel = 0;
+    this.habitacionesConEnemigos = new Map();
   }
 
   preload() {
@@ -118,7 +120,7 @@ class Juego_Principal extends Phaser.Scene {
       "action_left",
       "action_right",
     ];
-    let enemyList = ["Idle", "move", "attack", "dead"];
+    this.enemyList = ["Idle", "move", "attack", "dead"];
     this.BackgroundMusic = this.sound.add("Gameplay");
     this.BackgroundMusic.play({ loop: true, volume: 0.0 });
     this.lights.enable();
@@ -134,7 +136,7 @@ class Juego_Principal extends Phaser.Scene {
           height: { min: 9, max: 15, onlyOdd: false },
         },
         // Cantidad maxima de cuartos
-        maxRooms: 3,
+        maxRooms: 5,
       },
     });
     this.mapa = this.make.tilemap({
@@ -158,8 +160,6 @@ class Juego_Principal extends Phaser.Scene {
       0,
       this.cuartos.length * 0.9
     );
-
-    //
 
     this.mazmorra.rooms.forEach(function (cuarto) {
       var x = cuarto.x;
@@ -259,7 +259,16 @@ class Juego_Principal extends Phaser.Scene {
       "personaje"
     ).setPipeline("Light2D");
     this.jugador.animationCharacter(playerList);
-
+    //Se crea el enemigo
+    this.enemigosGroup = this.add.group({
+      classType: slime,
+      key: "Enemigo",
+      maxSize: 50,
+      repeat: 50,
+      active: false,
+      visible: false,
+      runChildUpdate: true,
+    });
     //Creamos la llave
     this.llave = new Llave(
       this,
@@ -279,13 +288,13 @@ class Juego_Principal extends Phaser.Scene {
     });
 
     this.enemigo.add(); */
-    this.enemigo = new slime(
+    /*     this.enemigo = new slime(
       this,
       this.mapa.tileToWorldX(playerRoom.x + 4),
       this.mapa.tileToWorldY(playerRoom.y + 4),
       "Enemigo"
-    );
-    this.enemigo.animationEnemigo(enemyList);
+    ); */
+
     //Se crea la luz
     this.luces = this.lights
       .addLight(0, 0, 200)
@@ -334,14 +343,13 @@ class Juego_Principal extends Phaser.Scene {
       .setBackgroundColor("#6f7e87");
     this.cameras.addExisting(this.minimap);
     this.minimap.ignore(this.info);
-    //this.minimap.ignore();
   }
 
   update(time, delta) {
     if (this.jugador.pickKey) {
       this.puertaSalida.destroy();
       this.layer.setTileIndexCallback(TILES.ESCALERAS, () => {
-        //this.layer.setTileIndexCallback(TILES.ESCALERAS, null);
+        this.layer.setTileIndexCallback(TILES.ESCALERAS, null);
         this.escalaresEncontras = true;
         const cam = this.cameras.main;
         cam.fade(500, 0, 0, 0);
@@ -358,28 +366,104 @@ class Juego_Principal extends Phaser.Scene {
     //Se actuliza la posisición del jugador
     this.jugador.update();
     //
-    this.enemigo.update();
+
     //
     var playerTileX = this.mapa.worldToTileX(this.jugador.x);
     var playerTileY = this.mapa.worldToTileY(this.jugador.y);
     //Un metodo que ayuda a generar las habitaciones creando el cuarto al momento que el jugador entra a la habitación
     var room = this.mazmorra.getRoomAt(playerTileX, playerTileY);
+    this.entrarNuevaHabitacion(room);
+    this.activeRoom = room;
 
+    if (room != this.cuartoInicio && room != this.cuartoFinal) {
+      this.enemigosGroup.children.iterate((enemy) => {
+        enemy.update();
+      });
+    }
+    /*     this.mazmorra.drawToConsole({
+      empty: " ",
+      emptyColor: "rgb(0, 0, 0)",
+      wall: "#",
+      wallColor: "rgb(255, 0, 0)",
+      floor: "0",
+      floorColor: "rgb(210, 210, 210)",
+      door: "x",
+      doorColor: "rgb(0, 0, 255)",
+      fontSize: "8px",
+    }); */
+  }
+
+  entrarNuevaHabitacion(room) {
+    // Verificar si la habitación es diferente de la habitación actual
     if (room && this.activeRoom && this.activeRoom !== room) {
-      //Hace que el cuarto anterior se oscurezca
+      // Establecer la habitación actual como la nueva habitación
+
+      // Mostrar la habitación actual
       if (!debug) {
         this.setRoomAlpha(room, 1);
         if (this.activeRoom) this.setRoomAlpha(this.activeRoom, 0.3);
-        this.activeRoom = room;
       }
-      if (this.activeRoom == this.cuartoFinal) {
+      // Mostrar la puerta de salida si la habitación es la final
+      if (room === this.cuartoFinal) {
         this.puertaSalida.setVisible(true);
       }
-    }
 
+      // Generar enemigos si la habitación no es la de inicio o final
+      if (room !== this.cuartoInicio && room !== this.cuartoFinal) {
+        if (!this.habitacionesConEnemigos.has(room)) {
+          // Generar enemigos y agregar la habitación al registro
+          this.generarEnemigos(room);
+        }
+      }
+    }
     this.activeRoom = room;
   }
 
+  generarEnemigos(room) {
+    // Generar enemigos en la habitación
+    const numEnemies = Phaser.Math.Between(1, 1); // Generar un número aleatorio de enemigos
+    // Guardar la cantidad de enemigos generados en la habitación
+    this.habitacionesConEnemigos.set(room, numEnemies);
+
+    for (let i = 0; i < numEnemies; i++) {
+      const enemyX = Phaser.Math.Clamp(
+        Phaser.Math.Between(room.left + 1, room.right - 1),
+        room.left + 1,
+        room.right - 1
+      );
+      const enemyY = Phaser.Math.Clamp(
+        Phaser.Math.Between(room.top + 1, room.bottom - 1),
+        room.top + 1,
+        room.bottom - 1
+      );
+      console.log("Aparecio un mostro");
+      const enemy = this.enemigosGroup.get(
+        enemyX * 16 + 8,
+        enemyY * 16 + 8,
+        "Enemigo"
+      );
+      enemy.setActive(true);
+      enemy.setVisible(true);
+      this.enemigosGroup.add(enemy);
+      enemy.jugador = this.jugador;
+      enemy.animationEnemigo(this.enemyList);
+
+      // Se agrega el colisionador entre el enemigo y el grupo de enemigos
+      this.physics.add.collider(enemy, this.enemigosGroup);
+    }
+  }
+
+  eliminarEnemigo(room) {
+    // Reducir la cantidad de enemigos vivos en la habitación
+    const remainingEnemies = this.habitacionesConEnemigos.get(room) - 1;
+    if (remainingEnemies <= 0) {
+      // Si ya no quedan enemigos vivos en la habitación, eliminar la entrada del registro
+      this.habitacionesConEnemigos.delete(room);
+    } else {
+      // Actualizar la cantidad de enemigos vivos en la habitación
+      this.habitacionesConEnemigos.set(room, remainingEnemies);
+    }
+  }
   setRoomAlpha(room, alpha) {
     this.mapa.forEachTile(
       function (tile) {

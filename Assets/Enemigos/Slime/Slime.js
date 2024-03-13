@@ -6,11 +6,27 @@ class slime extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.collider(this, this.scene.layer);
     scene.physics.add.collider(this, this.scene.jugador);
     this.body.setSize(16, 16);
-    this.body.immovable = true;
+    this.body.immovable = false;
     this.setScale(0.7);
+    this.rangoAtaque = 16;
+    this.distanciaJugador;
+    this.persiguiendoJugador = false;
+    this.atacandoJugador = false;
   }
   update() {
-    this.seguirJugador();
+    this.distanciaJugador = Phaser.Math.Distance.BetweenPoints(
+      this.scene.jugador,
+      this
+    );
+    if (
+      this.scene.jugador.active &&
+      this.scene.jugador.visible &&
+      this.active
+    ) {
+      // Llama al método para seguir al jugador
+      this.seguirJugador();
+      this.atacarJugador();
+    }
   }
   animationEnemigo(animationNames) {
     this.animationNames = {};
@@ -29,19 +45,44 @@ class slime extends Phaser.Physics.Arcade.Sprite {
   }
 
   seguirJugador() {
-    this.scene.physics.moveToObject(this, this.scene.jugador, 30);
-    this.play(this.animationNames["move"], true);
-    if (this.x > this.scene.jugador.x) {
-      this.setFlipX(false);
-    } else {
-      this.setFlipX(true);
+    if (!this.atacandoJugador) {
+      this.persiguiendoJugador = true;
+      setTimeout(() => {
+        this.scene.physics.moveToObject(this, this.scene.jugador, 30);
+      }, 500);
+
+      this.play(this.animationNames["move"], true);
+      if (this.x > this.scene.jugador.x) {
+        this.setFlipX(false);
+      } else {
+        this.setFlipX(true);
+      }
+
+      if (this.distanciaJugador <= this.rangoAtaque) {
+        this.persiguiendoJugador = false;
+        this.atacandoJugador = true;
+        console.log("Cerca para atacar");
+        //this.anims.stop();
+      }
     }
   }
   atacarJugador() {
-    this.scene.physics.overlap(this, this.scene.jugador, () => {
-      this.anims.stop();
+    if (!this.persiguiendoJugador) {
+      console.log("Atacando");
       this.play(this.animationNames["attack"], true);
-      console.log("Ataque Loli");
-    });
+      this.scene.physics.overlap(
+        this,
+        this.scene.jugador,
+        (enemigo, player) => {
+          console.log("ay mi pichula");
+        }
+      );
+      if (this.distanciaJugador > this.rangoAtaque) {
+        console.log("Dejando de atacar");
+        this.persiguiendoJugador = true;
+        this.atacandoJugador = false;
+        //this.anims.stop();
+      }
+    }
   }
 }
