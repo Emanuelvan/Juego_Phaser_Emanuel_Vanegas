@@ -64,7 +64,7 @@ class Menu_Inicio extends Phaser.Scene {
       yoyo: true,
       repeat: -1,
     });
-    this.BackgroundMusic.play({ loop: true, volume: 0.0 });
+    this.BackgroundMusic.play({ loop: true, volume: 0.5 });
   }
 
   create() {

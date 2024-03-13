@@ -160,7 +160,7 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
           this.attackHitbox.y = this.y + 5;
         } else if (this.direccion === "up") {
           this.attackHitbox.x = this.x;
-          this.attackHitbox.y = this.y - 15;
+          this.attackHitbox.y = this.y - 8;
         }
         this.attackHitbox.setVisible(true);
       }
@@ -169,8 +169,6 @@ class jugador extends Phaser.Physics.Arcade.Sprite {
   }
   // Función para manejar la colisión con la hitbox de ataque
   handleAttackCollision(attackHitbox, enemy) {
-    // Lógica para manejar la colisión con el enemigo
-    // Puedes hacer lo que necesites aquí, como dañar al enemigo, etc.
     enemy.recibirGolpes();
   }
 }

@@ -64,6 +64,7 @@ class Juego_Principal extends Phaser.Scene {
   constructor() {
     super({ key: "Juego_Principal" });
     this.nivel = 0;
+    this.dificultad = 3;
     this.habitacionesConEnemigos = new Map();
   }
 
@@ -101,6 +102,7 @@ class Juego_Principal extends Phaser.Scene {
 
   create() {
     this.nivel++;
+    this.dificultad++;
     let playerList = [
       "Idle_Down",
       "walk_down",
@@ -121,8 +123,10 @@ class Juego_Principal extends Phaser.Scene {
       "action_right",
     ];
     this.enemyList = ["Idle", "move", "attack", "dead"];
-    this.BackgroundMusic = this.sound.add("Gameplay");
-    this.BackgroundMusic.play({ loop: true, volume: 0.0 });
+    if (!this.BackgroundMusic || !this.BackgroundMusic.isPlaying) {
+      this.BackgroundMusic = this.sound.add("Gameplay");
+      this.BackgroundMusic.play({ loop: true, volume: 0.5 });
+    }
     this.lights.enable();
     this.mazmorra = new Dungeon({
       // El tamaño general del grid
@@ -136,7 +140,7 @@ class Juego_Principal extends Phaser.Scene {
           height: { min: 9, max: 15, onlyOdd: false },
         },
         // Cantidad maxima de cuartos
-        maxRooms: 3,
+        maxRooms: this.dificultad,
       },
     });
     this.mapa = this.make.tilemap({
@@ -403,7 +407,7 @@ class Juego_Principal extends Phaser.Scene {
 
   generarEnemigos(room) {
     // Generar enemigos en la habitación
-    const numEnemies = Phaser.Math.Between(1, 1); // Generar un número aleatorio de enemigos
+    const numEnemies = Phaser.Math.Between(1, 4); // Generar un número aleatorio de enemigos
     // Guardar la cantidad de enemigos generados en la habitación
     this.habitacionesConEnemigos.set(room, numEnemies);
 
@@ -476,7 +480,7 @@ const config = {
   parent: "Juego Dungeon Emanuel",
   pixelArt: true,
   roundPixels: true,
-  scene: [/* Menu_Inicio */ Juego_Principal],
+  scene: [Menu_Inicio, Juego_Principal],
   physics: {
     default: "arcade",
     arcade: {

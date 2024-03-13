@@ -83,6 +83,7 @@ class slime extends Phaser.Physics.Arcade.Sprite {
             this.scene.jugador,
             (enemigo, player) => {
               console.log("Daño recibido");
+              //this.scene.jugado.recibirDamage();
             }
           );
           this.ultimoGolpeTiempo = tiempoActual;
@@ -111,7 +112,7 @@ class slime extends Phaser.Physics.Arcade.Sprite {
     this.body.setVelocity(0, 0);
     var playerTileX = this.scene.mapa.worldToTileX(this.jugador.x);
     var playerTileY = this.scene.mapa.worldToTileY(this.jugador.y);
-    if (Phaser.Math.Between(1, 10) <= 100) {
+    if (Phaser.Math.Between(1, 10) <= 3) {
       const xLlave = this.scene.mapa.tileToWorldX(playerTileX + 1);
       const yLlave = this.scene.mapa.tileToWorldY(playerTileY + 1);
       const nuevaLlave = new Llave(this.scene, xLlave, yLlave, "Llave");
