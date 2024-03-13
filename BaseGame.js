@@ -136,7 +136,7 @@ class Juego_Principal extends Phaser.Scene {
           height: { min: 9, max: 15, onlyOdd: false },
         },
         // Cantidad maxima de cuartos
-        maxRooms: 5,
+        maxRooms: 3,
       },
     });
     this.mapa = this.make.tilemap({
@@ -270,30 +270,6 @@ class Juego_Principal extends Phaser.Scene {
       runChildUpdate: true,
     });
     //Creamos la llave
-    this.llave = new Llave(
-      this,
-      this.mapa.tileToWorldX(playerRoom.x + 3),
-      this.mapa.tileToWorldY(playerRoom.y + 4),
-      "Llave"
-    );
-    //Se crea los enemigos
-    /*     this.enemigo = this.add.group({
-      className: slime,
-      key: "Enemigo",
-      maxSize: 2,
-      repeat: 2,
-      active: false,
-      visible: false,
-      runChildUpdate: true,
-    });
-
-    this.enemigo.add(); */
-    /*     this.enemigo = new slime(
-      this,
-      this.mapa.tileToWorldX(playerRoom.x + 4),
-      this.mapa.tileToWorldY(playerRoom.y + 4),
-      "Enemigo"
-    ); */
 
     //Se crea la luz
     this.luces = this.lights
@@ -368,16 +344,22 @@ class Juego_Principal extends Phaser.Scene {
     //
 
     //
+
     var playerTileX = this.mapa.worldToTileX(this.jugador.x);
     var playerTileY = this.mapa.worldToTileY(this.jugador.y);
     //Un metodo que ayuda a generar las habitaciones creando el cuarto al momento que el jugador entra a la habitación
     var room = this.mazmorra.getRoomAt(playerTileX, playerTileY);
     this.entrarNuevaHabitacion(room);
     this.activeRoom = room;
-
+    const coloresSlimes = ["0x3d93d9", "0x#d0e354", "0xcf3072", "0x#85db84"];
+    function seleccionarColorAleatorio() {
+      const indiceAleatorio = Math.floor(Math.random() * coloresSlimes.length);
+      return coloresSlimes[indiceAleatorio];
+    }
     if (room != this.cuartoInicio && room != this.cuartoFinal) {
       this.enemigosGroup.children.iterate((enemy) => {
         enemy.update();
+        enemy.setTint(0xd0e354);
       });
     }
     /*     this.mazmorra.drawToConsole({
@@ -436,7 +418,6 @@ class Juego_Principal extends Phaser.Scene {
         room.top + 1,
         room.bottom - 1
       );
-      console.log("Aparecio un mostro");
       const enemy = this.enemigosGroup.get(
         enemyX * 16 + 8,
         enemyY * 16 + 8,
