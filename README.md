@@ -1,4 +1,1 @@
-Juego Creado en Phaser Por Emanuel Vanegas Gamboa
-
-
-Profe no le crea
+Game developed in Javascript using the phaser library, assets extracted from https://opengameart.org/ and edited in photoshop
